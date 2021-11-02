@@ -14,7 +14,7 @@ import Base.*
 
 const φ0 = [1.,0.] .+ 0im
 const φ1 = [0.,1.] .+ 0im
-const φx = (φ0 + im*φ1) / √2
+const φx = 1/√2(φ0)
 const φy = (φ0 + im*φ1) / √2
 const ⊗ = kron
 
