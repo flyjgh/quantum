@@ -1,7 +1,6 @@
 # using Yao
 # using YaoPlots
-using Plots
-const ⊗ = kron
+# using Plots
 
 # |0> = [1. + 0im, 0. + 0im]
 # |1> = [0. + 0im, 1. + 0im]
@@ -23,7 +22,6 @@ const ⊗ = kron
 # circuit = circuit |> put(1, 1=>H)
 # circuit.state
 
-1/√2
 id =  [1 0
        0 1]
 
@@ -97,29 +95,37 @@ cswap = [1 0 0 0 0 0 0 0
          0 0 0 0 0 1 0 0
          0 0 0 0 0 0 0 1]
 
-bellstate = cₓ * (H ⊗ id)
+bell = cx * (H ⊗ id)
 
-invbell = (H ⊗ id) * cₓ
+invbell = (H ⊗ id) * cx
 
 rotationX(θ) = [cos(θ/2)   -sin(θ/2)im
                -sin(θ/2)im  cos(θ/2)]
+rotationX(x, θ) = rotationX(θ) * x
 
 rotationY(θ) = [cos(θ/2) -sin(θ/2)
                 sin(θ/2)  cos(θ/2)]
+rotationY(x, θ) = rotationY(θ) * x
 
 rotationZ(θ) = [ℯ^(θ/2im) 0
                 0        ℯ^(θ/2im)]
+rotationZ(x, θ) = rotationZ(θ) * x
+
+phase_shift(θ) = [1 0
+                 0 ℯ^(θ*im)]
+phase_shift(x, θ) = phase_shift(θ) * x
 
 φ0 = [1. + 0im, 0. + 0im]
 φ1 = [0. + 0im, 1. + 0im]
 φx = [1/√2 + 0im, 1/√2 + 0im] # == H * φ0
 φy = [1/√2 + 0im,-1/√2 + 0im] # == H * φ1
 
-X * φ0 == φ1
+σₓ * φ0 == φ1
 H * φ0 == φx
 H * φ1 == (1/√2)*(φ0-φ1) == φy
 φy == (φ0 - φ1) / √2 == [1/√2 + 0im,-1/√2 + 0im]
-φ0 - φ1
 
 H * φ0
 swap * (φ1 ⊗ φ0)
+
+invbell * bell * (φ1 ⊗ φ0) ≈ (φ1 ⊗ φ0)
