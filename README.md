@@ -1,3 +1,3 @@
 # Quantum
 
-Me trying to understand quantum mechanics.
+trying out Qiskit, Yao and other
